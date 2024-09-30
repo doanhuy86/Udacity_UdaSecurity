@@ -40,18 +40,18 @@ public class SecurityService {
         if (foundCat && armingStatus == ArmingStatus.ARMED_HOME) {
             setAlarmStatus(AlarmStatus.ALARM);
         }
-        System.out.println("setArmingStatus = " + armingStatus.toString());
+        //System.out.println("setArmingStatus = " + armingStatus.toString());
         if(armingStatus == ArmingStatus.DISARMED) {
             setAlarmStatus(AlarmStatus.NO_ALARM);
         }
         //fix Test10
         else {
-            System.out.println("Move here");
+            //System.out.println("Move here");
             ConcurrentSkipListSet<Sensor> sensors = new ConcurrentSkipListSet<>(getSensors());
             System.out.println("size = " + sensors.size());
-            sensors.forEach(s -> System.out.println(s.getActive()));
+            //sensors.forEach(s -> System.out.println(s.getActive()));
             sensors.forEach(s -> changeSensorActivationStatus(s, false));
-            sensors.forEach(s -> System.out.println(s.getActive()));
+            //sensors.forEach(s -> System.out.println(s.getActive()));
         }
         securityRepository.setArmingStatus(armingStatus);
         statusListeners.forEach(StatusListener::sensorStatusChanged);
