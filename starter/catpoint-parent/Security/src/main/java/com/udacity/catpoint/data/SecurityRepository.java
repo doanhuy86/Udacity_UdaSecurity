@@ -1,4 +1,4 @@
-package com.udacity.catpoint.Security.data;
+package com.udacity.catpoint.data;
 
 import java.util.Set;
 

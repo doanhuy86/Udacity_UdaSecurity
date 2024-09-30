@@ -1,4 +1,4 @@
-package com.udacity.catpoint.Security.data;
+package com.udacity.catpoint.data;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;

@@ -5,7 +5,7 @@ module com.udacity.catpoint.security {
     requires com.google.gson;
     requires java.prefs;
     requires com.udacity.catpoint.Image;
-    opens com.udacity.catpoint.Security.data to com.google.gson;
+    opens com.udacity.catpoint.data to com.google.gson;
 
 }
 
