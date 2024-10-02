@@ -39,6 +39,18 @@
 <!--            <version>3.8.1</version>-->
 <!--            <scope>test</scope>-->
 <!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/dev.mccue/guava-reflect -->
+        <dependency>
+            <groupId>dev.mccue</groupId>
+            <artifactId>guava-reflect</artifactId>
+            <version>33.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>[18.0,)</version>
+        </dependency>
         <dependency>
             <groupId>com.udacity.catpoint</groupId>
             <artifactId>Image</artifactId>
@@ -105,7 +117,28 @@
                 </execution>
             </executions>
         </plugin>
-        </plugins>
 
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M5</version> <!-- Use the latest version -->
+            <configuration>
+                <argLine>
+                    --add-opens com.udacity.catpoint/com.udacity.catpoint.service=ALL-UNNAMED
+                    --add-opens java.base/java.lang=ALL-UNNAMED
+                    --add-opens java.base/java.util=ALL-UNNAMED
+                </argLine>
+            </configuration>
+        </plugin>
+        </plugins>
     </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs</artifactId>
+                <version>4.8.6</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>

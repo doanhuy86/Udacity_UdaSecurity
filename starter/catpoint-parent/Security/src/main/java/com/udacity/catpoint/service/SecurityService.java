@@ -48,7 +48,7 @@ public class SecurityService {
         else {
             //System.out.println("Move here");
             ConcurrentSkipListSet<Sensor> sensors = new ConcurrentSkipListSet<>(getSensors());
-            System.out.println("size = " + sensors.size());
+            //System.out.println("size = " + sensors.size());
             //sensors.forEach(s -> System.out.println(s.getActive()));
             sensors.forEach(s -> changeSensorActivationStatus(s, false));
             //sensors.forEach(s -> System.out.println(s.getActive()));
@@ -64,9 +64,10 @@ public class SecurityService {
      */
     private void catDetected(Boolean cat) {
         foundCat = cat;
+        boolean hasInactiveSensors = getSensors().stream().noneMatch(Sensor::getActive);
         if(cat && getArmingStatus() == ArmingStatus.ARMED_HOME) {
             setAlarmStatus(AlarmStatus.ALARM);
-        } else {
+        } else if (!foundCat && hasInactiveSensors) {
             setAlarmStatus(AlarmStatus.NO_ALARM);
         }
 
@@ -113,7 +114,7 @@ public class SecurityService {
     private void handleSensorDeactivated() {
         switch(securityRepository.getAlarmStatus()) {
             case PENDING_ALARM -> setAlarmStatus(AlarmStatus.NO_ALARM);
-            case ALARM -> setAlarmStatus(AlarmStatus.PENDING_ALARM);
+            //case ALARM -> setAlarmStatus(AlarmStatus.PENDING_ALARM);
         }
     }
 
